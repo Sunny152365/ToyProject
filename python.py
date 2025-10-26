@@ -18,3 +18,22 @@ del movie_rank[1] # '스플릿' 삭제
 """
 
 # 리스트 합치기
+lang1 = ['C', 'C++', 'JAVA']
+lang2 = ['Python', 'Go', 'C#']
+langs = lang1 + lang2
+
+# 리스트 최소값, 최대값
+nums = [1, 2, 3, 4, 5, 6, 7]
+min(nums)
+max(nums)
+
+# 리스트의 합
+sum(nums)
+
+# 리스트의 길이(저장된 데이터의 개수)
+len(nums)
+
+# 리스트의 평균
+avg = sum(nums) / len(nums)
+
+
