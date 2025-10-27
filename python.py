@@ -36,4 +36,21 @@ len(nums)
 # 리스트의 평균
 avg = sum(nums) / len(nums)
 
+# 리스트 슬라이싱
+price = ['20180728', 100, 130, 140, 150, 160, 170]
+price_slicing = price[1:]
+
+# 리스트 슬라이싱 응용, 홀수만 출력
+num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+num_slicing_odd = num[::2] # [0::2]과 동일한 의미
+
+# 리스트 슬라이싱 응용, 짝수만 출력
+num_slicing_even = num[1::2]
+
+# 리스트 슬라이싱 응용, 역순으로 출력
+num_slicing_reverse = num[::-1]
+
+# 리스트 바인딩 출력
+interest = ['삼성전자', 'LG전자', 'SK Hynix'. 'Naver']
+print(interest[0], interest[3])
 
