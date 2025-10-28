@@ -54,3 +54,18 @@ num_slicing_reverse = num[::-1]
 interest = ['삼성전자', 'LG전자', 'SK Hynix'. 'Naver']
 print(interest[0], interest[3])
 
+# 리스트 join 메서드
+interest = ['삼성전자', 'LG전자', 'SK Hynix', 'Naver', '미래에셋대우']
+print(" ".join(interest))
+
+# 리스트 join 메서드 응용(/구분자 변경)
+print("/".join(interest))
+
+# 문자열 split 메서드
+string = "삼성전자/LG전자/SK Hynix/Naver"
+interest_split = string.split("/")
+
+# 리스트 정렬(오름차순 정렬)
+data = [2, 4, 3, 1, 5, 10, 9]
+data.sort()
+data2 = sorted(data) # 원본 리스트는 변경되지 않음
