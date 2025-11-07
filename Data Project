@@ -11,3 +11,8 @@ ERD 및 논리적 설계
 
 
 Oracle, MySQL, MariaDB, PostgreSQL, SQLite 등 DBMS 종류 및 특징 정리
+
+데이터 전처리
+1. 결측치 처리
+2. 이상치 처리
+3. 데이터 정규화/표준화
