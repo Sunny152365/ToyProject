@@ -20,3 +20,8 @@ Oracle, MySQL, MariaDB, PostgreSQL, SQLite 등 DBMS 종류 및 특징 정리
 - 극단적인 값 제거 및 수정(성능 향상을 위해)
 
 3. 데이터 정규화/표준화
+
+
+각각의 서비스의 장단점 및 특징 정리
+Pandas, NumPy, Matplotlib, Seaborn, Plotly, Scikit-learn 요약 및 정리
+다양한 기술 스택 장단점 및 특징 정리
