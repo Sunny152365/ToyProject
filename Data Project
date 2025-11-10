@@ -25,3 +25,8 @@ Oracle, MySQL, MariaDB, PostgreSQL, SQLite 등 DBMS 종류 및 특징 정리
 각각의 서비스의 장단점 및 특징 정리
 Pandas, NumPy, Matplotlib, Seaborn, Plotly, Scikit-learn 요약 및 정리
 다양한 기술 스택 장단점 및 특징 정리
+
+SQL 관계 대수
+- 릴레이션을 처리하기 위한 연산의 집합
+일반 집합 연산 : 합집합, 교지합, 차집합, 곱집합
+순수 관계 연산 : 셀렉트, 프로젝트, 조인, 디비전
