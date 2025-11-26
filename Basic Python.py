@@ -172,4 +172,30 @@ print(f2)
 print(f3)
 print(f4)
 
-#18 
+#18 복소수형 자료 : 실수부 + 허수부j로 구성된 수
+c1 = 1 + 7j
+print(c1.real); print(c1.imag)
+c2 = complex(2, 3)
+print(c2)
+
+#19 대입 연산자(=)
+a = 1
+b = 2
+ret = a+b
+print('a와 b를 더한 값은', end=' ')
+print(ret,end=' ')
+print('입니다.')
+
+#20 사직 연산자(+,-,*,/,**)
+a = 2
+b = 4
+ret1 = a + b          # ret1 = 2+4 = 6
+ret2 = a - b          # ret2 = 2-4 = -2
+ret3 = a * b          # ret3 = 2*4 = 8
+ret4 = a / b          # ret4 = 2/4 = 0.5
+ret5 = a ** b         # ret5 = 2**4 = 16
+ret6 = a+a*b/a        # ret6 = 2+2*4/2 = 6
+ret7 = (a+b)*(a-b)    # ret7 = (2+4)*(2-4) = -12
+ret8 = a*b**a         # ret8 = 2*4**2 = 32
+
+#21 
