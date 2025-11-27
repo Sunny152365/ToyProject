@@ -238,4 +238,157 @@ print(hex(bit1 ^ bit2))   # 0x3이 출력됨
 print(hex(bit1 >> 1))     # 0x30이 출력됨
 print(hex(bit2 << 2))     # 0x188이 출력됨
 
-#26 
+#26 시퀀스 자료형(어떤 객체가 순서를 가지고 나열되어 있는 것)
+strdata = 'abcde'                # 문자열은 시퀀스 자료형
+listdata = [1, [2, 3], '안녕']    # 리스트는 시퀀스 자료트
+tupledata = (100, 200, 300)      # 튜플(값 변경 안됨)은 시퀀스 자료형
+
+#27 시퀀스 자료 인덱싱(인덱싱 : 시퀀스 자료형에서 인덱스를 통해 해당하는 값을 얻는 방법, 0부터 시작)
+strdata = 'Time is money!!'
+listdata = [1, 2,[1,2,3]]
+print(strdata[5])        # 'i'가 출력됨
+print(strdata[-2])       # '!'가 출력됨
+print(listdata[0])       # 1이 출력됨
+print(listdata[-1])      # [1,2,3]이 출력됨
+print(listdata[2][-1])   # 3이 출력됨
+
+#28 시퀀스 자료 슬라이싱(시퀀스 자료에서 일정 범위에 해당하는 부분을 취하는 방법, [시작 인덱스 : 끝 인덱스 : 스텝])
+strdata = 'Time is money!!'
+print(strdata[1:5])      # 'ime '가 출력됨
+print(strdata[:7])       # 'Time is'가 출력됨
+print(strdata[9:])       # 'oney!!'가 출력됨
+print(strdata[:-3])      # 'Time is mone'가 출력됨
+print(strdata[-3:])      # 'y!!'가 출력됨
+print(strdata[:])        # 'Time is money!!'가 출력됨
+print(strdata[::2])      # 'Tm smny!'가 출력됨
+
+#29 시퀀스 자료 연결(+, 두 개의 시퀀스 자료형이 동일해야 함)
+strdata1 = 'I love '; strdata = 'Python'; strdata3 = 'you'
+listdata1 = [1,2,3]; listdata2 = [4,5,6]
+print(strdata1 + strdata2)        # 'I love Python'이 출력됨
+print(strdata1 + strdata3)        # 'I love you'가 출력됨
+print(listdata1 + listdata2)      # [1,2,3,4,5,6]이 출력됨
+
+#30 시퀀스 자료 반복(*)
+artist = 'BTS!'
+fan = 'ARMY'
+dispdata = fan + '들이 외칩니다.' + artist * 3
+print(dispdata)   # 'ARMY들이 외칩니다.BTS!BTS!BTS!'가 출력됨
+
+#31 시퀀스 자료 크기(len())
+strdata1 = 'I love Python'
+strdata2 = '나는 파이썬을 사랑합니다'
+listdata = ['a', 'b', 'c', strdata1, strdata2]
+print(len(strdata1))      # 13이 출력됨
+print(len(strdata2))      # 13가 출력됨
+print(len(listdata))      # 5가 출력됨
+print(len(listdata[3]))   # 13가 출력됨
+
+#32 멤버체크(in, 자료에 어떤 값이 있는지 없는지 확인) : <값> in <자료>
+listdata = [1, 2, 3, 4]
+ret1 = 5 in listdata    # False
+ret2 = 4 in listdata    # True
+print(ret1); print(ret2)
+strdata = 'abcde'
+ret3 = 'c' in strdata   # True
+ret4 = '1' in strdata   # False
+print(ret3); print(ret4)
+
+#33 문자열(문자나 기호가 순서로 나열되어 있는 시퀀스 자료)
+strdata1 = '나는 파이썬 프로그래머다'
+strdata2 = "You are a programmer"
+strdata3 = """I love
+    python. You love
+python too!
+"""
+strdata4 = "My son's name is John"       # ""안에서 '사용하기
+strdata5 = '문자열"abc"의 길이는 3입니다.'     # ''안에서 "사용하기
+
+#34 문자열 포맷팅
+txt1 = '자바'; txt2 = '파이썬'
+num1 = 5; num2 = 10
+print('나는 %s보다 %s에 더 익숙합니다.'%(txt1, txt2))
+print('%s은 %s보다 %d배 더 쉽습니다.'%(txt2, txt1, num1))
+print('%d + %d = %d'%(num1, num2, num1+num2))
+print('작년 세계 경제 성장률은 전년에 비해 %d%% 포인트 증가했다.' %num1)
+
+from time import sleep
+for i in range(100):
+    msg = '\r진행률 : %d%%'%(i+1)
+    print(''*len(msg), end='')
+    print(msg, end='')
+    sleep(0.1)
+
+#35 이스케이프 문자
+print('나는 파이썬을 사랑합니다.\n파이썬은 자바보다 훨씬 쉽습니다.')
+print('Name:John Smith\tSex:Male\tAge:22')
+print('이 문장은 화면폭에 비해 너무 길어 보기가 힘듭니다. \
+그래서 \\Enter키를 이용해 문장을 다음줄과 연속되도록 했습니다.')
+print('작은따옴표(\')와 큰 따옴표(")는 문자열을 정의할 때 사용합니다.')
+
+#36 리스트([])
+list1 = [1, 2, 3, 4, 5]
+list2 = ['a', 'b', 'c']
+list3 = [1, 'a', 'abc', [1,2,3,4,5],['a','b','c']]
+list1[0] = 6
+print(list1)          # [6, 2, 3, 4, 5]로 출력됨
+def myfunc():
+    print('안녕하세요')
+list4 = [1,2,myfunc]
+list4[2]()            # '안녕하세요'가 출력됨, ()를 안쓰면 어떻게 되는가?
+
+#37 튜플(()) : 요소의 값 변경 불가
+tuple1 = (1, 2, 3, 4, 5)
+tuple2 = ('a', 'b', 'c')
+tuple3 = (1, 'a', 'abc', (1,2,3,4,5), ('a','b','c'))
+tuple1[0] = 6    # 오류 발생(튜플은 값 변경 불가)
+def myfunc():
+    print('안녕하세요')
+tuple4 = (1,2,myfunc)
+tuple4[2]()      # '안녕하세요'가 출력됨
+
+#38 사전({}) : 키와 값의 쌍으로 이루어진 자료형
+dict1 = {'a':1, 'b':2, 'c':3}
+print(dict1['a'])    # 1이 출력됨
+dict1['d'] = 4
+print(dict1)         # {'a':1, 'b':2, 'c':3, 'd':4}가 출력됨
+dict1['b'] = 7
+print(dict1)         # {'a':1, 'b':7, 'c':3, 'd':4}가 출력됨
+print(len(dict1))    # 4가 출력됨
+
+#39 함수(def)
+def add_number(n1, n2):
+    ret = n1 + n2
+    return ret
+
+def add_txt(t1, t2):
+    print(t1 + t2)
+    
+ans = add_number(10, 15)
+print(ans)                 # 25가 출력됨
+text1 = '대한민국~'
+text2 = '만세!!'
+add_txt(text1, text2)      # '대한민국~만세!!'가 출력됨
+
+#40 함수 인자
+def add_txt(t1, t2='파이썬'):
+    print(t1 + ':' + t2)
+
+add_txt('베스트')                   # '베스트:파이썬'이 출력됨
+add_txt(t2='대한민국', t1='1등')     # '1등:대한민국'이 출력됨
+
+def func1(*args):
+    print(args)
+    
+def func2(width, height, **kwargs):
+    print(kwargs)
+
+func1()                                # 빈 튜플이 출력됨
+func1(3, 5, 1, 5)                      # (3, 5, 1, 5)가 출력됨
+func2(10, 20)                          # 빈 딕셔너리가 출력됨
+func2(10, 20,depth=50, color='blue')   # {'depth': 50, 'color': 'blue'}가 출력됨
+
+#41 지역변수와 전역변수(global)
+
+
+#42
