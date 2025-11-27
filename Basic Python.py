@@ -198,4 +198,44 @@ ret6 = a+a*b/a        # ret6 = 2+2*4/2 = 6
 ret7 = (a+b)*(a-b)    # ret7 = (2+4)*(2-4) = -12
 ret8 = a*b**a         # ret8 = 2*4**2 = 32
 
-#21 
+#21 연산자 축약(+=,-=,*=,/=)
+a = 0
+a += 1       # a = a + 1, a의 값은 1
+a -= 5       # a = a - 5, a의 값은 -4
+a *= 2       # a = a * 2, a의 값은 -8
+a /= 4       # a = a / 4, a의 값은 -2.0
+
+#22 True/False 자료형 : True(참, 1)과 False(거짓, 0)을 나타내는 논리 자료형
+a = True
+b = False
+print(a == 1) # True가 출력됨
+print(b != 0) # False가 출력됨
+
+#23 관계 연산자(==, !=, >, <, >=, <=)
+x = 1; y = 2
+str1 = 'abc'; str2 = 'python'
+print(x == y)           # False가 출력됨
+print(x != y)           # True가 출력됨
+print(str1 == str2)     # False가 출력됨
+print(str2 == 'python') # True가 출력됨
+print(str1 < str2)      # True가 출력됨(문자열의 사전순서로 비교)
+
+#24 논리 연산자(and, or, not)
+bool1 = True; bool2 = False; bool3 = True; bool4 = False
+print(bool1 and bool2)  # False가 출력됨
+print(bool1 and bool3)  # True가 출력됨
+print(bool2 or bool3)   # True가 출력됨
+print(bool2 or bool4)   # False가 출력됨
+print(not bool1)        # False가 출력됨
+print(not bool2)        # True가 출력됨
+
+#25 비트 연산자(&, |, ~, ^, <<, >>)
+bit1 = 0x61
+bit2 = 0x62
+print(hex(bit1 & bit2))   # 0x60이 출력됨
+print(hex(bit1 | bit2))   # 0x63이 출력됨
+print(hex(bit1 ^ bit2))   # 0x3이 출력됨
+print(hex(bit1 >> 1))     # 0x30이 출력됨
+print(hex(bit2 << 2))     # 0x188이 출력됨
+
+#26 
