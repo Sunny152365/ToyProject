@@ -389,6 +389,26 @@ func2(10, 20)                          # 빈 딕셔너리가 출력됨
 func2(10, 20,depth=50, color='blue')   # {'depth': 50, 'color': 'blue'}가 출력됨
 
 #41 지역변수와 전역변수(global)
+param = 10
+strdata = '전역변수'
 
+def func1():
+    strdata = '지역변수'
+    print(strdata)
+
+def func2():
+    param = 1
+
+def func3():
+    global param
+    param = 50
+    
+func1()               # '지역변수'가 출력됨
+print(strdata)        # '전역변수'가 출력됨
+print(param)          # 10이 출력됨
+func2(param)
+print(param)          # 10이 출력됨
+func3()
+print(param)          # 50이 출력됨
 
 #42
