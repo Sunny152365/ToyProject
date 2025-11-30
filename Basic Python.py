@@ -377,7 +377,7 @@ def add_txt(t1, t2='파이썬'):
 add_txt('베스트')                   # '베스트:파이썬'이 출력됨
 add_txt(t2='대한민국', t1='1등')     # '1등:대한민국'이 출력됨
 
-def func1(*args):
+def func1(*args):                 # 가변 인자 : *args는 튜플로 전달됨
     print(args)
     
 def func2(width, height, **kwargs):
@@ -388,7 +388,7 @@ func1(3, 5, 1, 5)                      # (3, 5, 1, 5)가 출력됨
 func2(10, 20)                          # 빈 딕셔너리가 출력됨
 func2(10, 20,depth=50, color='blue')   # {'depth': 50, 'color': 'blue'}가 출력됨
 
-#41 지역변수와 전역변수(global)
+#41 지역변수와 전역변수(global) : 지역변수(함수 내에서만 유효한 변수), 전역변수(코드 전반에 걸쳐 유효한 변수)
 param = 10
 strdata = '전역변수'
 
@@ -411,4 +411,39 @@ print(param)          # 10이 출력됨
 func3()
 print(param)          # 50이 출력됨
 
-#42
+#42 함수 리턴값(return) : 리턴값이 여러 개인 경우 튜플로 반환
+def reverse(x, y, z):
+    return z, y, x
+
+ret = reverse(1, 2, 3)
+print(ret)                        # (3, 2, 1)이 출력됨
+
+r1, r2, r3 = reverse('a', 'b', 'c')
+print(r1); print(r2); print(r3)   # 'c', 'b', 'a' 순으로 출력됨
+
+#43 파이썬 모듈 : 다양한 기능을 미리 구현해 놓은 파이썬 파일(.py)
+import time
+
+print('5초간 프로그램을 정지합니다.')
+time.sleep(5)
+print('5초가 지났습니다.')
+
+#44 파이썬 패키지(파이썬 모듈을 계층적인 디렉터리 형태로 구성한 것)
+import mypackage.mylib
+
+ret1 = mypackage.mylib.add_txt('대한민국', '1등')
+ret2 = mypackage.mylib.reverse(1, 2, 3)
+
+#45 파이썬 모듈 임포트(import)
+import time                        # 파이썬 내장 모듈인 time을 import
+import mylib                       # 내가 만든 mylib을 module import
+import mypackage.mylib             # mypackage에 있는 mylib module import
+
+time.sleep(1)                      # time 모듈의 sleep 함수를 이용해 1초간 정지
+mylib.add_txt('나는', '파이썬이다')    # mylib 모듈의 add_txt 함수 호출
+mypackage.mylib.reverse(1, 2, 3)   # mypackage의 mylib 모듈의 reverse 함수 호출
+
+#46 파이썬 모듈(from-import)
+
+
+#47
