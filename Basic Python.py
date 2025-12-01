@@ -428,7 +428,7 @@ print('5초간 프로그램을 정지합니다.')
 time.sleep(5)
 print('5초가 지났습니다.')
 
-#44 파이썬 패키지(파이썬 모듈을 계층적인 디렉터리 형태로 구성한 것)
+#44 파이썬 패키지(파이썬 모듈을 계층적인 디렉터리 형태로 구성한 것) : __init__.py 파일
 import mypackage.mylib
 
 ret1 = mypackage.mylib.add_txt('대한민국', '1등')
@@ -437,13 +437,188 @@ ret2 = mypackage.mylib.reverse(1, 2, 3)
 #45 파이썬 모듈 임포트(import)
 import time                        # 파이썬 내장 모듈인 time을 import
 import mylib                       # 내가 만든 mylib을 module import
-import mypackage.mylib             # mypackage에 있는 mylib module import
+import mypackage.mylib             # mypackage에 있는 mylib module import(순서 : 패키지이름.모듈이름)
 
 time.sleep(1)                      # time 모듈의 sleep 함수를 이용해 1초간 정지
 mylib.add_txt('나는', '파이썬이다')    # mylib 모듈의 add_txt 함수 호출
 mypackage.mylib.reverse(1, 2, 3)   # mypackage의 mylib 모듈의 reverse 함수 호출
 
 #46 파이썬 모듈(from-import)
+"""
+from 모듈이름 import 함수이름
+from 패키지이름 import 모듈이름
+"""
+from time import sleep
+from mypackage import mylib
+from mypackage.mylib import reverse
+
+sleep(1)                             # time 모듈의 sleep 함수 호출
+mylib.add_txt('나는', '파이썬이다')      # mypackage.mylib 모듈의 add_txt 함수 호출
+reverse(1, 2, 3)                     # mypackage.mylib 모듈의 reverse 함수 호출
+
+#47 파이썬 모듈(import~as) : import 이름이 긴 모듈명 as 별명
+import mypackage as mp
+import mypackage.mylib as ml
+
+ret1 = mp.mylib.add_txt('대한민국', '1등')
+ret2 = ml.reverse(1, 2, 3)
+
+#48 파일 열고 닫기(open, close) : open(파일이름, 모드)
+f1 = open('test.txt', 'r')
+f2 = open('d:/myimages/mypictues1.jpg', 'rb')
+
+#--------------------------------------------
+# 오픈한 파일을 처리하는 코드를 작성함
+#--------------------------------------------
+
+f1.close()
+f2.close()
+
+#49 클래스(class)
+class MyClass:
+    var = '안녕하세요'
+    def sayHello(self): # self : 인스턴스 객체 자기 자신을 의미
+        print(self.var)
+        
+obj = MyClass()         # MyClass의 인스턴스 객체 생성
+print(obj.var)          # '안녕하세요'가 출력됨
+obj.sayHello()          # '안녕하세요'가 출력됨
+
+#50 클래스 멤버(클래스 메소드 바깥에서 선언)와 인스턴스 멤버(클래스 메소드 안에서 self와 함께 선언되는 변수)
+class MyClass:
+    var = '안녕하세요!!'
+    def sayHello(self):
+        param1 = '안녕' .     # 함수 내에서만 유효한 지역변수
+        self.param2 = '하이'  # 함수 내에 선언된 인스턴스 멤버
+        print(param1)        # '안녕'이 출력됨
+        print(self.var)      # '안녕하세요!!'가 출력됨
+
+obj = MyClass()
+print(obj.var)               # '안녕하세요!!'가 출력됨
+obj.sayHello()               # '안녕'과 '안녕하세요!!'가 출력됨
+#obj.param
+
+#51 클래스 메소드
+class MyClass:
+    def sayHello(self):
+        print('안녕하세요')
+    
+    def sayBye(self, name):
+        print('%s! 다음에 보자!' %name)
+
+obj = MyClass()
+obj.sayHello()            # '안녕하세요'가 출력됨
+obj.sayBye('철수')         # '철수! 다음에 보자!'가 출력됨
+
+#52 클래스 생성자(def __init__(self, *args), *args : 가변 인자)
+class MyClass:
+    def __init__(self):
+        self.var = '안녕하세요!'
+        print('MyClass 인스턴스 객체가 생성되었습니다')
+
+obj = MyClass()          # 'MyClass 인스턴스 객체가 생성되었습니다'가 출력됨
+print(obj.var)           # '안녕하세요!'가 출력됨
+
+#53 클래스 소멸자
+class MyClass:    
+    def __del__(self):
+        print('MyClass 인스턴스 객체가 메모리에서 제거됩니다')
+
+obj = MyClass()          # MyClass 인스턴스 객체가 생성됨
+del obj                  # 'MyClass 인스턴스 객체가 메모리에서 제거됩니다'가 출력됨
+
+#54 클래스 상속(class 자식클래스(부모클래스):)
+class Add:
+    def add(self, n1, n2):
+        return n1 + n2
+
+class Calculator(Add):
+    def sub(self, n1, n2):
+        return n1 - n2
+
+obj = Calculator()
+print(obj.add(1, 2))  # 3이 출력됨
+print(obj.sub(1, 2))  # -1이 출력됨
+
+#54-1 클래스 다중 상속
+class Add:
+    def add(self, n1, n2):
+        return n1 + n2
+
+class Multiply:
+    def mul(self, n1, n2):
+        return n1 * n2
+
+class Calculator(Add, Multiply):
+    def sub(self, n1, n2):
+        return n1 - n2
+
+obj = Calculator()
+print(obj.add(1, 2))   # 3이 출력됨
+print(obj.mul(3, 4))   # 12이 출력됨
+
+#55 예외처리(try~except)
+try:
+    print('안녕하세요')
+    print(param)
+except:
+    print('예외가 발생했습니다!')
+
+#56 예외처리(try~except~else)
+try:
+    print('안녕하세요')
+    print(param)
+except:
+    print('예외가 발생했습니다!')
+else: # 오류가 발생하지 않았을 때 실행
+    print('예외가 발생하지 않았습니다.')
+
+#57 예외처리(try~except~finally)
+try:
+    print('안녕하세요')
+    print(param)
+except:
+    print('예외가 발생했습니다!')
+finally: # 오류 발생 유무와 상관없이 어떤 코드를 무조건 실행
+    print('무조건 실행하는 코드')
+
+#58 예외처리(try~except Exception as e)
+try:
+    print(param)
+except Exception as e:
+    print(e)       # name 'param' is not defined가 출력됨
+
+#59 예외처리(try~except 특정 예외)
+import time
+count = 1
+try:
+    while True:
+        print(count)
+        count += 1
+        time.sleep(0.5)
+except KeyboardInterrupt: # Ctrl+C가 입력되면 발생하는 오류
+    print('사용자에 의해 프로그램이 종료되었습니다.')
+
+#60 사용자 입력받기(input)
+k = input('<값>을 입력하세요:')
+print('당신이 입력한 값은 <' + k + '>입니다.')
+
+#61 자료형 확인(type)
+numdata = 57
+strdata = '파이썬'
+listdata = [1,2,3]
+dictdata = {'a':1, 'b':2}
+
+def func():
+    print('안녕하세요.')
+
+print(type(numdata))
+print(type(strdata))
+print(type(listdata))
+print(type(dictdata))
+print(type(func))
+
+#62 나눗셈에서 나머지만 구하기(%)
 
 
-#47
+#63
