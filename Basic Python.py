@@ -691,7 +691,7 @@ print(idata3)       # 171이 출력됨
 fdata = float(10)
 print(fdata)       # 10.0으로 출력됨
 
-#071 정수 리스트에서 소수만 걸러내기(filter)
+#071 정수 리스트에서 소수만 걸러내기(filter) : filter(함수, 자료)
 def getPrime(x):
     if x%2 == 0:
         return
@@ -706,17 +706,91 @@ listdata = [117, 119, 1113, 11113, 11119]
 ret = filter(getPrime, listdata)
 print(list(ret))            # [11113, 11119]가 출력됨
 
-#072 
-#073
-#074
-#075
-#076
-#077
-#078
-#079
-#080
-#081
-#082
+#072 최대값과 최소값(max, min)
+listdata = [9.96, 1.27, 5.07, 6.45, 8.38, 9.29, 4.93, 7.73, 3.71, 0.93]
+maxval = max(listdata)
+minval = min(listdata)
+print(maxval)      # 9.96이 출력됨
+print(minval)      # 0.93이 출력됨
+
+txt = 'Alotofthingsoccureachday'
+maxval = max(txt)
+minval = min(txt)
+print(maxval)      # 'y'가 출력됨
+print(minval)      # 'A'가 출력됨
+
+maxval = max(2+3, 2*3, 2**3, 3**2)
+minval = min('abz', 'a12')
+print(maxval)      # 9가 출력됨
+print(minval)      # 'a12'가 출력됨
+
+#073 1바이트에서 하위 4비트 추출
+a = 107        # 16진수로 0x6b
+b = a & 0x0f
+print(b)       # 11이 출력됨. 11은 16진수로 b임
+
+#074 1바이트에서 상위 4비트 추출
+a = 107              # 16진수로 0x6b
+b = (a >> 4) & 0x0f
+print(b)             # 6이 출력됨
+
+#075 문자열에서 특정 위치의 문자 얻기
+txt1 = 'A tale that was not right'
+txt2 = '이 또한 지나가리라.'
+print(txt1[5])       # 'e'가 출력됨
+print(txt2[-2])      # '라'가 출력됨
+
+#076 문자열에서 지정한 구간의 문자열 얻기
+txt1 = 'A tale that was not right'
+txt2 = '이 또한 지나가리라.'
+print(txt1[3:7])      # 'ale '가 출력됨
+print(txt1[:6])       # 'A tale'가 출력됨
+print(txt2[-4:])      # '가리라.'가 출력됨
+
+txt = 'python'
+for i in range(len(txt)):
+    print(txt[:i+1])
+
+#077 문자열에서 홀수 번째 문자만 추출
+txt = 'aAbBcCdDeEfFgGhHiIjJkK'
+ret = txt[::2]
+print(ret)       # 'abcdefghijk'가 출력됨
+ret = txt[1::2]  # 짝수 번째 문자만 추출
+print(ret)       # 'ABCDEFGHIJK'가 출력됨
+
+#078 문자열을 거꾸로 만들기
+txt = 'abcdefghijk'
+ret = txt[::-1]
+print(ret)          # 'kjihgfedcba'가 출력됨
+ret_1 = txt[::-2]   # 홀수 번째 문자만 거꾸로 추출
+ret_2 = txt[2::-2]  # 짝수 번째 문자만 거꾸로 추출
+
+#079 두 개의 문자열 합치기(+)
+filename = input('저장할 파일이름을 입력하세요:')
+filename = filename + '.jpg'
+display_msg = '당신이 저장한 파일은<' + filename + '>입니다.'
+print(display_msg)
+
+#080 문자열을 반복해서 새로운 문자열로 만들기(*)
+msg1 = '여러분'
+msg2 = '파이팅!'
+display_msg = msg1 + ', ' + msg2 * 3 + '~!'
+print(display_msg)
+
+#081 문자열에서 특정 문자가 있는지 확인(in)
+msg = input('임의의 문장을 입력하세요:')
+if 'a' in msg:
+    print('당신이 입력한 문장에는 a문자가 있습니다.')
+else:
+    print('당신이 입력한 문장에는 a문자가 없습니다.')
+
+#082 문자열에서 특정 문자열이 있는지 확인(in)
+msg = input('임의의 문장을 입력하세요:')
+if 'is' in msg:
+    print('당신이 입력한 문장에는 is문자가 있습니다.')
+else:
+    print('당신이 입력한 문장에는 is문자가 없습니다.')
+
 #083
 #084
 #085
