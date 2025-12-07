@@ -861,11 +861,33 @@ except:
     except:
         print('+++ 숫자를 입력하세요~ +++')
 
-#090
+#090 수치형 자료를 문자열로 변환(str)
+num1 = 1234
+num2 = 3.14
 
+numstr1 = str(num1)
+numstr2 = str(num2)
+print('num1을 문자열로 변환한 값은 "%s"입니다.' %numstr1)
+print('num2을 문자열로 변환한 값은 "%s"입니다.' %numstr2)
 
-#091
-#092
+#091 문자열에 있는 문자(열) 개수 구하기(count)
+txt = 'A lot of things occur each day, every day.'
+word_count1 = txt.count('o')
+word_count2 = txt.count('day')
+word_count3 = txt.count('')
+print(word_count1)    # 3가 출력됨
+print(word_count2)    # 2가 출력됨
+print(word_count3)    # 8가 출력됨
+
+#092 문자열에서 특정 문자(열) 위치 찾기(find)
+txt = 'A lot of things occur each day, every day.'
+offset1 = txt.find('e')
+offset2 = txt.find('day')
+offset3 = txt.find('day', 30)
+print(offset1)    # 22이 출력됨
+print(offset2)    # 27이 출력됨
+print(offset3)    # 38가 출력됨
+
 #093
 #094
 #095
