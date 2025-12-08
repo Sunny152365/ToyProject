@@ -879,7 +879,7 @@ print(word_count1)    # 3가 출력됨
 print(word_count2)    # 2가 출력됨
 print(word_count3)    # 8가 출력됨
 
-#092 문자열에서 특정 문자(열) 위치 찾기(find)
+#092 문자열에서 특정 문자(열) 위치 찾기(find) : 해당 문자나 문자열을 찾을 수 없으면 -1 리턴
 txt = 'A lot of things occur each day, every day.'
 offset1 = txt.find('e')
 offset2 = txt.find('day')
@@ -888,12 +888,192 @@ print(offset1)    # 22이 출력됨
 print(offset2)    # 27이 출력됨
 print(offset3)    # 38가 출력됨
 
-#093
-#094
-#095
-#096
-#097
-#098
-#099
-#100
-#101
+#093 문자열을 특정 문자(열)로 분리(split)
+url = 'http://www.naver.com/news/today=20160831'
+log = 'name:홍길동 age:17 sex:남자 nation:조선'
+
+ret1 = url.split('/')
+print(ret1)   # ['http:', '', 'www.naver.com', 'news', 'today=20160831']가 출력됨
+
+ret2 = log.split()   # 공백문자로 분리
+for data in ret2:
+    d1, d2 = data.split(':')
+    print('%s -> %s' %(d1, d2))
+
+#094 문자열을 특정 문자(열)로 결합(join)
+# join()의 인자는 문자열이 아니라 문자열을 요소로 가지는 리스트
+loglist = ['2016/08.26 10:12:11', '200', 'OK', '이 또한 지나가리라']
+bond = ';'
+log = bond.join(loglist)
+print(log)   # '2016/08.26 10:12:11;200;OK;이 또한 지나가리라' 출력
+
+#095 문자열에서 특정 문자(열)를 다른 문자(열)로 변경(replace)
+txt = 'My password is 1234'
+ret1 = txt.replace('1', '0')
+ret2 = txt.replace('1', 'python')
+print(ret1)   # 'My password is 0234'가 출력됨
+print(ret2)   # 'My password is python234'가 출력됨
+
+txt = '매일 많은 일들일 일어납니다.'
+ret3 = txt.replace('매일', '항상')
+ret4 = ret3.replace('일', '사건')
+print(ret3)   # '항상 많은 일들일 일어납니다.'가 출력됨
+print(ret4)   # '항상 많은 사건들 사건어납니다.'가 출력됨
+
+#096 문자열을 바이트 객체로 바꾸기(encode)
+u_txt = 'I love python'
+b_txt = u_txt.encode()
+print(u_txt)        # 'I love python'이 출력됨
+print(b_txt)        # b'I love python'이 출력됨
+
+ret1 = 'I' == u_txt[0]
+ret2 = 'I' == b_txt[0]
+print(ret1)         # True가 출력됨
+print(ret2)         # False가 출력됨
+
+#097 바이트 객체를 문자열로 바꾸기(decode)
+b_txt = b'A lot of things occur each day.'
+u_txt = b_txt.decode()
+print(u_txt)
+
+#098 문자열을 정렬(sorted, join)
+strdata = input('정렬할 문자열을 입력하세요:')
+ret1 = sorted(strdata)
+ret2 = sorted(strdata, reverse=True)
+print(ret1)
+print(ret2)
+ret1 = ''.join(ret1)
+ret2 = ''.join(ret2)
+ret3 = ''.join(sorted(strdata))
+ret4 = ''.join(sorted(strdata, reverse=True))
+print('오름차순으로 정렬된 문자열을 <' + ret1 + '>입니다.')
+print('내림차순으로 정렬된 문자열을 <' + ret2 + '>입니다.')
+print('오름차순으로 정렬된 문자열을 <' + ret3 + '>입니다.')
+print('내림차순으로 정렬된 문자열을 <' + ret4 + '>입니다.')
+
+#099 순차적인 정수 리스트 만들기(range)
+range1 = range(10)
+range2 = range(10, 20)
+print(list(range1))    # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]가 출력됨
+print(list(range2))    # [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]가 출력됨
+
+ret = 0
+for i in range(10):
+    ret += (i+1)
+
+#100 리스트에서 특정 위치의 요소 얻기
+listdata = [1, 2, 'a', 'b', 'c', [4, 5, 6]]
+val1 = listdata[1]
+val2 = listdata[3]
+val3 = listdata[5][1]
+print(val1)      # 2가 출력됨
+print(val2)      # 'b'가 출력됨
+print(val3)      # 5가 출력됨
+
+#101 리스트에서 특정 요소의 위치 구하기(index)
+slolarsys = ['태양', '수성', '금성', '지구', '화성', '목성', '토성', '천왕성', '해왕성', '지구']
+planet = '지구'
+pos = solarsys.index(planet)
+print('%s은(는) 태양계에서 %d번째에 위치하고 있습니다.' %(planet, pos))
+pos = solarsys.index(planet, 5)
+print('%s은(는) 태양계에서 %d번째에 위치하고 있습니다.' %(planet, pos))
+
+#102
+#103
+#104
+#105
+#106
+#107
+#108
+#109
+#110
+#111
+#112
+#113
+#114
+#115
+#116
+#117
+#118
+#119
+#120
+#121
+#122
+#123
+#124
+#125
+#126
+#127
+#128
+#129
+#130
+#131
+#132
+#133
+#134
+#135
+#136
+#137
+#138
+#139
+#140
+#141
+#142
+#143
+#144
+#145
+#146
+#147
+#148
+#149
+#150
+#151
+#152
+#153
+#154
+#155
+#156
+#157
+#158
+#159
+#160
+#161
+#162
+#163
+#164
+#165
+#166
+#167
+#168
+#169
+#170
+#171
+#172
+#173
+#174
+#175
+#176
+#177
+#178
+#179
+#180
+#181
+#182
+#183
+#184
+#185
+#186
+#187
+#188
+#189
+#190
+#191
+#192
+#193
+#194
+#195
+#196
+#197
+#198
+#199
+#200
