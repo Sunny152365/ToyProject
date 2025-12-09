@@ -978,8 +978,16 @@ print('%s은(는) 태양계에서 %d번째에 위치하고 있습니다.' %(plan
 pos = solarsys.index(planet, 5)
 print('%s은(는) 태양계에서 %d번째에 위치하고 있습니다.' %(planet, pos))
 
-#102
-#103
+#102 리스트에서 특정 위치의 요소를 변경
+soloarsys = ['태양', '수성', '금성', '지구', '화성', '목성', '토성', '천왕성', '해왕성']
+planet = '화성'
+pos = soloarsys.index(planet)
+soloarsys[pos] = 'Mars'
+print(solarsys)
+
+#103 
+
+
 #104
 #105
 #106
