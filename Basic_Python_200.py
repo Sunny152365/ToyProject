@@ -996,13 +996,50 @@ print('태양계의 가스형 행성:',end='');print(gas_planets)
 listdata = list(range(1, 21))
 evenlist = listdata[1::2]
 print(evenlist)
+# 홀수 번째
+oddlist = listdata[::2]
+print(oddlist)
 
-#105
-#106
-#107
-#108
-#109
-#110
+#105 리스트 요소 순서를 역순으로 만들기(reverse)
+listdata = list(range(5))
+listdata.reverse()
+print(listdata)   # [4, 3, 2, 1, 0]이 출력됨
+
+#106 리스트 요소 순서를 역순으로 만들기(reversed)
+listdata = list(range(5))
+ret1 = reversed(listdata)
+print('원본 리스트', end='');print(listdata)
+print('역순 리스트', end='');print(list(ret1))
+
+ret2 = listdata[::-1]
+print('슬라이싱 이용', end='');print(ret2)
+
+#107 리스트 합치기(+)
+listdata1 = ['a', 'b', 'c', 'd', 'e']
+listdata2 = ['f', 'g', 'h', 'i', 'j']
+listdata3 = listdata1 + listdata2
+listdata4 = listdata2 + listdata1
+print(listdata3)   # ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']가 출력됨
+print(listdata4)   # ['f', 'g', 'h', 'i', 'j', 'a', 'b', 'c', 'd', 'e']가 출력됨
+
+#108 리스트 반복하기(*)
+listdata = list(range(3))
+ret = listdata * 3
+print(ret)   # [0, 1, 2, 0, 1, 2, 0, 1, 2]가 출력됨
+
+#109 리스트에 요소 추가(append)
+listdata = []
+for i in range(3):
+    txt = input('리스트에 추가할 값을 입력하세요[%d/3]:' %(i+1))
+    listdata.append(txt)
+    print(listdata)
+
+#110 리스트의 특정 위치에 요소 삽입(insert)
+solarsys = ['태양', '수성', '금성', '지구', '화성', '목성', '토성', '천왕성', '해왕성']
+pos = solarsys.index('목성')
+solarsys.insert(pos, '소행성')
+print(solarsys)
+
 #111
 #112
 #113
