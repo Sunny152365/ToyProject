@@ -1040,18 +1040,82 @@ pos = solarsys.index('목성')
 solarsys.insert(pos, '소행성')
 print(solarsys)
 
-#111
-#112
-#113
-#114
-#115
-#116
-#117
-#118
-#119
-#120
-#121
-#122
+#111 리스트의 특정 위치의 요소 제거(del)
+solarsys = ['태양', '수성', '금성', '지구', '화성', '목성', '토성', '천왕성', '해왕성']
+del solarsys[0]
+print(solarsys)
+del solarsys[-2]
+print(solarsys)
+
+#112 리스트에서 특정 요소 제거(remove)
+solarsys = ['태양', '수성', '금성', '지구', '화성', '목성', '토성', '천왕성', '해왕성']
+solarsys.remove('태양')
+print(solarsys)
+
+#113 리스트에서 특정 구간에 있는 모든 요소 제거
+solarsys = ['태양', '수성', '금성', '지구', '화성', '목성', '토성', '천왕성', '해왕성']
+del solarsys[1:3]
+print(solarsys)
+
+#114 리스트에 있는 요소 개수 구하기(len)
+listdata = [2, 2, 1, 3, 8, 5, 7, 6, 3, 6, 2, 3, 9, 4, 4]
+listsize = len(listdata)
+print(listsize)   # 15가 출력됨
+
+#115 리스트에서 특정 요소 개수 구하기(count)
+listdata = [2, 2, 1, 3, 8, 5, 7, 6, 3, 6, 2, 3, 9, 4, 4]
+c1 = listdata.count(2)
+c2 = listdata.count(7)
+print(c1)   # 3이 출력됨
+print(c2)   # 1이 출력됨
+
+#116 리스트 제거하기(del)
+listdata = [2, 2, 1, 3, 8, 5, 7, 6, 3, 6, 2, 3, 9, 4, 4]
+del listdata
+print(listdata)
+
+#117 리스트 요소 정렬(sort)
+namelist = ['Marry', 'Sams', 'Aimy', 'Tom', 'Michale', 'Bob', 'Kelly']
+namelist.sort()
+print(namelist)   # ['Aimy', 'Bob', 'Kelly', 'Marry', 'Michale', 'Sams', 'Tom']가 출력됨
+namelist.sort(reverse=True)
+print(namelist)   # ['Tom', 'Sams', 'Michale', 'Marry', 'Kelly', 'Bob', 'Aimy']가 출력됨
+
+#118 리스트 요소 정렬(sorted)
+namelist = ['Marry', 'Sams', 'Aimy', 'Tom', 'Michale', 'Bob', 'Kelly']
+ret1 = sorted(namelist)
+ret2 = sorted(namelist, reverse=True)
+print(namelist)
+print(ret1)
+print(ret2)
+
+"""
+sort()   : 원본 리스트를 정렬한 형태로 변경
+sorted() : 원본 리스트는 그대로 두고 정렬한 결과 리스트 리턴
+"""
+
+#119 리스트 요소 무작위로 섞기(shuffle)
+from random import shuffle
+
+listdata = list(range(1, 11))
+for i in range(3):
+    shuffle(listdata)
+    print(listdata)      # 출력 결과는 실행할 때마다 달라짐
+
+#120 리스트의 모든 요소를 인덱스와 쌍으로 추출(enumerate)
+solarsys = ['태양', '수성', '금성', '지구', '화성', '목성', '토성', '천왕성', '해왕성']
+ret = list(enumerate(solarsys))
+print(ret)
+
+for i, body in enumerate(solarsys):
+    print('태양계의 %d번째 천체 : %s' %(i, body))
+
+#121 리스트의 모든 요소의 합 구하기(sum)
+
+
+#122  
+
+
 #123
 #124
 #125
