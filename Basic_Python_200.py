@@ -1111,10 +1111,20 @@ for i, body in enumerate(solarsys):
     print('태양계의 %d번째 천체 : %s' %(i, body))
 
 #121 리스트의 모든 요소의 합 구하기(sum)
+listdata = [2, 2, 1, 3, 8, 5, 7, 6, 3, 6, 2, 3, 9, 4, 4]
+ret = sum(listdata)
+print(ret)  # 65가 출력됨
 
-
-#122  
-
+#122 리스트 요소가 모두 참인지 확인(all, any)
+listdata1 = [0, 1, 2, 3, 4]
+listdata2 = [True, True, True]
+listdata3 = ['', [], (), {}, None, False]
+print(all(listdata1))   # False가 출력됨
+print(any(listdata1))   # True가 출력됨
+print(all(listdata2))   # True가 출력됨
+print(any(listdata2))   # True가 출력됨
+print(all(listdata3))   # False가 출력됨
+print(any(listdata3))   # False가 출력됨
 
 #123
 #124
