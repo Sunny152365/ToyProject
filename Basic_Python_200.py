@@ -1116,6 +1116,7 @@ ret = sum(listdata)
 print(ret)  # 65가 출력됨
 
 #122 리스트 요소가 모두 참인지 확인(all, any)
+# 거짓 : 0(숫자), ''(빈 문자열), ""(빈 문자열), [](빈 리스트), ()(빈 튜플), {}(빈 사전), None
 listdata1 = [0, 1, 2, 3, 4]
 listdata2 = [True, True, True]
 listdata3 = ['', [], (), {}, None, False]
@@ -1126,8 +1127,17 @@ print(any(listdata2))   # True가 출력됨
 print(all(listdata3))   # False가 출력됨
 print(any(listdata3))   # False가 출력됨
 
-#123
-#124
+#123 사전에 요소 추가
+solar1 = ['태양', '수성', '금성', '지구', '화성', '목성', '토성', '천왕성', '해왕성']
+solar2 = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+solardict = {}
+for i, k in enumerate(solar1):
+    val = solar2[i]
+    solardict[k] = val
+    
+print(solardict)
+
+#124 
 #125
 #126
 #127
