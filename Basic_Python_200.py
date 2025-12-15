@@ -1130,25 +1130,101 @@ print(any(listdata3))   # False가 출력됨
 #123 사전에 요소 추가
 solar1 = ['태양', '수성', '금성', '지구', '화성', '목성', '토성', '천왕성', '해왕성']
 solar2 = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
-solardict = {}
+solardict = {} # 순서가 없는 사전 자료
 for i, k in enumerate(solar1):
     val = solar2[i]
     solardict[k] = val
     
 print(solardict)
 
-#124 
-#125
-#126
-#127
-#128
-#129
-#130
-#131
-#132
-#133
-#134
-#135
+#124 사전의 특정 요소값 변경
+names = {'Mary':10999, 'Sams':2111, 'Aimy':9778, 'Tom':20245,
+         'Michale':27115, 'Bob':5887, 'Kelly'7855}
+names['Aimy'] = 10000
+print(names)
+
+#125 사전의 특정 요소 제거(del)
+names = {'Mary':10999, 'Sams':2111, 'Aimy':9778, 'Tom':20245,
+         'Michale':27115, 'Bob':5887, 'Kelly'7855}
+del names['Sams']
+print(names)
+
+#126 사전의 모든 요소 제거(clear)
+names = {'Mary':10999, 'Sams':2111, 'Aimy':9778, 'Tom':20245,
+         'Michale':27115, 'Bob':5887, 'Kelly'7855}
+names.clear()
+print(names)
+
+#127 사전에서 키만 추출(keys)
+names = {'Mary':10999, 'Sams':2111, 'Aimy':9778, 'Tom':20245,
+         'Michale':27115, 'Bob':5887, 'Kelly'7855}
+ks = names.keys()
+print(ks)
+
+for k in ks:
+    print('Key:%s \tValue:%d' %(k, names[k]))
+
+#128 사전에서 값만 추출(values)
+names = {'Mary':10999, 'Sams':2111, 'Aimy':9778, 'Tom':20245,
+         'Michale':27115, 'Bob':5887, 'Kelly'7855}
+vals = names.values()
+print(vals)
+
+vals_list = list(vals)
+ret = sum(vals_list)
+print('출생아 수 총계: %d' %ret)
+
+#129 사전 요소를 모두 추출(items)
+names = {'Mary':10999, 'Sams':2111, 'Aimy':9778, 'Tom':20245,
+         'Michale':27115, 'Bob':5887, 'Kelly'7855}
+items = names.items()
+print(items)
+
+for item in items:
+    print(item)
+
+#130 사전에 특정 키가 존재하는지 확인(in)
+names = {'Mary':10999, 'Sams':2111, 'Aimy':9778, 'Tom':20245,
+         'Michale':27115, 'Bob':5887, 'Kelly'7855}
+k = input('이름을 입력하세요:')
+if k in names:
+    print('이름이 <%s>인 출생아 수는 <%d>명입니다.' %(k, names[k]))
+else:
+    print('자료에 <%s>인 이름이 존재하지 않습니다.' %k)
+
+#131 사전 정렬(sorted)
+names = {'Mary':10999, 'Sams':2111, 'Aimy':9778, 'Tom':20245,
+         'Michale':27115, 'Bob':5887, 'Kelly'7855}
+ret1 = sorted(names)
+print(ret1)
+
+def f1(x):
+    return x[0]
+
+def f2(x):
+    return x[1]
+
+ret2 = sorted(names.items(), key=f1)
+print(ret2)
+
+ret3 = sorted(names.items(), key=f2)
+print(ret3)
+
+ret4 = sorted(names.items(), key=f2, reverse=True)
+print(ret4)
+
+#132 문자 코드값 구하기(ord)
+
+
+#133 코드값에 대응하는 문자 얻기(chr)
+
+
+#134 이름없는 한줄짜리 함수 만들기(lambda)
+
+
+#135 인자를 바꾸어 함수를 반복 호출하여 결과값 얻기(map)
+
+
 #136
 #137
 #138
