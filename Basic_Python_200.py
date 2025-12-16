@@ -1214,22 +1214,87 @@ ret4 = sorted(names.items(), key=f2, reverse=True)
 print(ret4)
 
 #132 문자 코드값 구하기(ord)
-
+ch = input('문자를 1개 입력하세요:')
+if len(ch) != 0:
+    ch = ch[0]
+    chv = ord(ch)
+    print('문자: %s \t코드값: %d[%s]' %(ch, chv, hex(chv)))
 
 #133 코드값에 대응하는 문자 얻기(chr)
+val = input('문자 코드값을 입력하세요:')
+val = int(val)
+try:
+    ch = chr(val)
+    print('코드값: %d[%s], 문자: %s' %(val, hex(val), ch))
+except ValueError:
+    print('입력한 <%d>에 대한 문자가 조냊하지 않습니다!' %val)
 
+#134 문자열도 된 식을 실행(eval)
+expr1 = '2+3'
+expr2 = 'round(3.7)'
+ret1 = eval(expr1)
+ret2 = eval(expr2)
+print('<%s>를 eval()로 실행한 결과:' %expr1, end='');print(ret1)
+print('<%s>를 eval()로 실행한 결과:' %expr2, end='');print(ret2)
 
-#134 이름없는 한줄짜리 함수 만들기(lambda)
+#135 이름없는 한줄짜리 함수 만들기(lambda)
+add = lambda x, y: x + y
+ret = add(1, 3)
+print(ret)   # 4가 출력됨
 
+funcs = [lambda x: x + '.pptx', lambda x: x + '.docx']
+ret1 = funcs[0]('intro')
+ret2 = funcs[1]('Report')
+print(ret1)   # 'intro.pptx'가 출력됨
+print(ret2)   # 'Report.docx'가 출력됨
 
-#135 인자를 바꾸어 함수를 반복 호출하여 결과값 얻기(map)
+names = {'Mary':10999, 'Sams':2111, 'Aimy':9778, 'Tom':20245, 'Michale':27115, 
+         'Bob':5887, 'Kelly'7855}
+ret3 = sorted(names.items(), key=lambda x: x[0]) # names의 키를 기준으로 오름차순으로 정렬한 결과를 리턴
+print(ret3)
 
+"""
+def 함수이름(인자,...):
+    실행코드
+   
+lambda 인자, 인자...: 실행코드
+"""
 
-#136
-#137
-#138
-#139
-#140
+#136 인자를 바꾸어 함수를 반복 호출하여 결과값 얻기(map)
+f = lambda x: x * x
+args = [1, 2, 3, 4, 5]
+ret = map(f, args)
+print(list(ret))
+
+#137 텍스트 파일을 읽고 출력(read)
+f = open('stockcode.txt', 'r')
+data = f.read()
+print(data)
+f.close()
+
+#138 텍스트 파일을 한줄씩 읽고 출력(readline)
+f = open('stockcode.txt', 'r')
+line_num = 1
+line = f.readline()
+while line:
+    print('%d: %s' %(line_num, line), end='')
+    line = f.readline()
+    line_num += 1
+f.close()
+
+#139 텍스트 파일을 한줄씩 읽고 출력(readlines)
+f = open('stockcode.txt', 'r')
+lines = f.readlines()
+for line_num, line in enumerate(lines):
+    print('%d %s' %(line_num+1, line), end='')
+f.close()
+
+#140 화면에서 사용자 입력을 받고 파일로 쓰기(write)
+text = input('파일에 저장할 내용을 입력하세요:')
+f = open('mydata.txt', 'w')
+f.write(text)
+f.close()
+
 #141
 #142
 #143
