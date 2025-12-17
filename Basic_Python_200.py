@@ -243,10 +243,10 @@ strdata = 'abcde'                # 문자열은 시퀀스 자료형
 listdata = [1, [2, 3], '안녕']    # 리스트는 시퀀스 자료트
 tupledata = (100, 200, 300)      # 튜플(값 변경 안됨)은 시퀀스 자료형
 
-#027 시퀀스 자료 인덱싱(인덱싱 : 시퀀스 자료형에서 인덱스를 통해 해당하는 값을 얻는 방법, 0부터 시작)
-strdata = 'Time is money!!'
-listdata = [1, 2,[1,2,3]]
-print(strdata[5])        # 'i'가 출력됨
+#027  파일 이름 바꾸기(os.rename)시퀀스 자료 인덱싱(인덱싱 : 시퀀스 자료형에서 인덱스를 통해 해당하는 값을 얻는 방법, 0부터 시작)
+strda 파일을 다른 디렉터리로 이동(os.rename) 파일 이름 바꾸기(os.rename)ta = 'Time is money!!'
+listd 파일을 다른 디렉터리로 이동 디렉터리에 있는 파일목록 얻기(os.listdir, glob.glob)(os.rename)ata = [1, 2,[1,2,3]]
+print(strdata[5])     디렉터리에 있는 파일목록 얻기(os.listdir, glob.glob)    # 'i'가 출력됨
 print(strdata[-2])       # '!'가 출력됨
 print(listdata[0])       # 1이 출력됨
 print(listdata[-1])      # [1,2,3]이 출력됨
@@ -1295,16 +1295,86 @@ f = open('mydata.txt', 'w')
 f.write(text)
 f.close()
 
-#141
-#142
-#143
-#144
-#145
-#146
-#147
-#148
-#149
-#150
+#141 텍스트 파일에 한줄씩 쓰기(writelines)
+count = 1
+data = []
+print('파일에 내용을 저장하려면 내용을 입력하지 말고 [Enter]를 누르세요')
+while True:
+    text = input('[%d]파일에 저장할 내용을 입력하세요: ' %count)
+    if text == '':
+        break
+    data.append(text + '\n')
+    count += 1
+
+f = open('mydata.txt', 'w')
+f.writelines(data)
+f.close()
+
+#142 텍스트 파일 복사(read, write)
+f = open('stockcode.txt', 'r')
+h = open('stockcode_copy.txt', 'w')
+
+data = f.read()
+h.write(data)
+
+f.close()
+h.close()
+
+#143 바이너리 파일 복사(read, write)
+bufsize = 1024 # 1024 = 1KB
+f = open('img_sample.jpg', 'wb')
+h = open('img_sample_copy.jpg', 'rb')
+
+data = f.read(bufsize)
+while data:
+    h.write(data)
+    data = f.read(bufsize)
+    
+f.close()
+h.close()
+
+#144 파일을 열고 자동으로 닫기(with ~ as)
+with open('stockcode.txt', 'r') as f:
+    for line_num, line in enumerate(f.readlines()):
+        print('%d %s' %(line_num+1, line), end='')
+
+#145 파일의 특정 부분만 복사(seek, read, write)
+spos = 105     # 파일을 읽는 위치 저장
+size = 500     # 읽을 크기를 지정
+
+f = open('stockcode.txt', 'r')
+h = open('stockcode_part.txt', 'w')
+
+f.seek(spos)
+data = f.read(size)
+h.write(data)
+
+h.close()
+f.close()
+
+#146 파일의 크기 구하기(os.path.getsize)
+from os.path import getsize
+
+file1 = 'stockcode.txt'
+file2 = 'd:/devlab/py200/img_sample.jpg'
+file_size1 = getsize(file1)
+file_size2 = getsize(file2)
+
+print('File Name: %s \tSize: %d bytes' %(file1, file_size1))
+print('File Name: %s \tSize: %d bytes' %(file2, file_size2))
+
+#147 파일 삭제(os.remove)
+from os import remove
+
+target_file = 'stockcode_copy.txt'
+k = input('[%s] 파일을 삭제하겠습니까? (y/n): ' %target_file)
+if k == 'y':
+    remove(target_file)
+    print('[%s] 파일을 삭제했습니다.' %target_file)
+
+#148 파일 이름 바꾸기(os.rename)
+#149 파일을 다른 디렉터리로 이동(os.rename)
+#150 디렉터리에 있는 파일목록 얻기(os.listdir, glob.glob)
 #151
 #152
 #153
