@@ -244,7 +244,17 @@ listdata = [1, [2, 3], '안녕']    # 리스트는 시퀀스 자료트
 tupledata = (100, 200, 300)      # 튜플(값 변경 안됨)은 시퀀스 자료형
 
 #027  파일 이름 바꾸기(os.rename)시퀀스 자료 인덱싱(인덱싱 : 시퀀스 자료형에서 인덱스를 통해 해당하는 값을 얻는 방법, 0부터 시작)
+from os import rename
+
+target_file = 'stockcode.txt'
+newname =
+
 strda 파일을 다른 디렉터리로 이동(os.rename) 파일 이름 바꾸기(os.rename)ta = 'Time is money!!'
+from os import rename
+
+target_file = 'stockcode.txt'
+newname =
+
 listd 파일을 다른 디렉터리로 이동 디렉터리에 있는 파일목록 얻기(os.listdir, glob.glob)(os.rename)ata = [1, 2,[1,2,3]]
 print(strdata[5])     디렉터리에 있는 파일목록 얻기(os.listdir, glob.glob)    # 'i'가 출력됨
 print(strdata[-2])       # '!'가 출력됨
@@ -1373,18 +1383,107 @@ if k == 'y':
     print('[%s] 파일을 삭제했습니다.' %target_file)
 
 #148 파일 이름 바꾸기(os.rename)
+from os import rename
+
+target_file = 'stockcode.txt'
+newname = input('[%s]에 대한 새로운 파일이름을 입력하세요:' %target_file)
+rename(target_file, newname)
+print('[%s] -> [%s]로 파일이름이 변경되었습니다.' %(target_file, newname))
+
 #149 파일을 다른 디렉터리로 이동(os.rename)
+from os import rename
+
+target_file = 'stockcode.txt'
+newpath = input('[%s]를 이동할 디렉터리의 절대경로를 입력하세요:' %target_file)
+
+if newpath[-1] == '/':
+    newname = newpath + target_file
+else:
+    newname = newpath + '/' + target_file
+    
+try:
+    rename(target_file, newname)
+    print('[%s] -> [%s]로 이동되었습니다.' %(target_file, newname))
+except FileNotFoundError as e:
+    print(e)
+
 #150 디렉터리에 있는 파일목록 얻기(os.listdir, glob.glob)
-#151
-#152
-#153
-#154
-#155
-#156
-#157
-#158
-#159
-#160
+import os, glob
+
+folder = 'd:/devlab/py200'
+file_list = os.listdir(folder)
+print(file_list)
+
+files = '*.txt'
+file_list = glob.glob(files)
+print(file_list)
+
+"""
+listdir() : 인자로 입력된 조건이나 경로에 해당하는 파일들을 리스트로 리턴
+glob()    : 인자는 윈도우 명령 프롬프트나 유닉스 쉘 프로그램에서 사용하는 와일드카드(*)를 사용 가능
+"""
+
+#151 현재 디렉터리 확인하고 바꾸기(os.getcwd, os.chdir)
+import os
+
+pdir = os.getcwd(); print(pdir)
+os.chdir('..'); print(os.getcwd())
+os.chdir(pdir); print(os.getcwd())
+
+#152 디렉터리 생성(os.mkdir)
+import os
+
+newfolder = input('새로 생성할 디렉터리 이름을 입력하세요:')
+try:
+    os.mkdir(newfolder)
+    print('[%s] 디렉터리가 생성되었습니다.' %newfolder)
+except Exception as e:
+    print(e)
+
+#153 디렉터리 제거(os.rmdir)
+import os
+
+target_folder = 'tmp'
+k = input('[%s] 디렉터리를 삭제하겠습니까? (y/n): ' %target_folder)
+if k == 'y':
+    try:
+        os.rmdir(target_folder)
+        print('[%s] 디렉터리를 삭제되었습니다.' %target_folder)
+    except Exception as e:
+        print(e)
+
+#154 하위 디렉터리 및 파일 전체 삭제(shutil.rmtree)
+import shutil
+import os
+
+target_folder = 'd:/devlab/py200/tmp'
+print('[%s] 하위 모든 디렉터리 및 파일들을 삭제합니다.' %target_folder)
+for file in os.listdir(target_folder):
+    print(file)
+k = input('[%s]를 삭제하겠습니까? (y/n): ' %target_folder)
+if k == 'y':
+    try:
+        shutil.rmtree(target_folder)
+        print('[%s] 모든 하위 디렉터리와 파일들을 삭제했습니다.' %target_folder)
+    except Exception as e:
+        print(e)
+
+#155 파일이 존재하는지 체크(os.path.exists)
+import os
+from os.path import exists
+
+dir_name = input('새로 생성할 디렉터리 이름을 입력하세요:')
+if not exists(dir_name):
+    os.mkdir(dir_name)
+    print('[%s] 디렉터리를 생성되었습니다.' %dir_name)
+else:
+    print('[%s](는) 이미 존재합니다.' %dir_name)
+
+#156 파일인지 디렉터리인지 확인(os.path.isfile, os.path.isdir)
+#157 현재 시간을 년-월-일 시:분:초로 출력(localtime, strftime)
+#158 올해 경과된 날짜수 계산(localtime)
+#159 오늘의 요일 계산(localtime)
+#160 프로그램 실행 시간 계산(datetime.now)
 #161
 #162
 #163
