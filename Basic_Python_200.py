@@ -1540,10 +1540,49 @@ print('총 계산 시간: ', end='');print(elapsed)
 elapsed_ms = int(elapsed.total_seconds()*1000)
 print('총 계산 시간: %dms' %elapsed_ms)
 
-#161
-#162
-#163
-#164
+#161 주어진 숫자를 천 단위로 구분
+num = input('아무 숫자를 입력하세요: ')
+
+if num.isdigit():
+    num = num[::-1]
+    ret = ''
+    for i, c in enumerate(num):
+        if i != len(num) and i%3 == 0:
+            ret += (c + ',')
+        else:
+            ret += c
+    ret = ret[::-1]
+    print(ret)
+else:
+    print('입력한 내용 [%s]: 숫자가 아닙니다.' %num)
+
+#162 문자열의 각 문자를 그 다음 문자로 변경 
+text = input('문자열을 입력하세요:')
+
+ret = ''
+for i in range(len(text)):
+    if i != len(text) - 1:
+        ret += text[i+1]
+    else:
+        ret += text[0]
+
+print(ret)
+
+#163 URL에서 호스트 도메인 추출
+url = 'http://news.naver.com/main.read.nhn?mode=LSD&mid=shm&sid1=105&oid=028&aid=0002334601'
+
+tmp = url.split('/')
+domain = tmp[2]
+print(domain)
+
+#164 URL에서 쿼리 문자열 추출
+url = 'http://news.naver.com/main.read.nhn?mode=LSD&mid=shm&sid1=105&oid=028&aid=0002334601'
+
+tmp = url.split('?')
+queries = tmp[1].split('&')
+for query in queries:
+    print(query)
+
 #165
 #166
 #167
