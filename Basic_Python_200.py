@@ -1583,15 +1583,132 @@ queries = tmp[1].split('&')
 for query in queries:
     print(query)
 
-#165
-#166
-#167
-#168
-#169
-#170
-#171
-#172
-#173
+#165 스택 구현(append, pop)
+mystack = []
+
+def putdata(data):
+    global mystack
+    mystack.append(data)
+    
+def popdata():
+    global mystack
+    if len(mystack) == 0:
+        return None
+    return mystack.pop()
+
+putdata('데이터1')
+putdata([3, 4, 5, 6])
+putdata(12345)
+
+print('<스택상태>: ', end='');print(mystack)
+
+ret = popdata()
+while ret != None:
+    print('스택에서 데이터 추출:', end='');print(ret)
+    print('<스택상태>: ', end='');print(mystack)
+    ret = popdata()
+
+#166 문장에 나타나는 문자 빈도수 계산
+def getTextFreq(filename):
+    with open(filename, 'r') as f:
+        text = f.read()
+        fa = {}
+        for c in text:
+            if c in fa:
+                fa[c] += 1
+            else:
+                fa[c] = 1
+    return fa
+
+ret = getTextFreq('mydata.txt')
+ret = sorted(ret.items(), key=lambda x:x[1], reverse=True)
+for c, freq in ret:
+    if c == '\n':
+        continue
+    print('[%c] -> [%d]회 나타남' %(c, freq))
+
+#167 텍스트 파일에 있는 단어 개수 계산
+with open('mydata.txt', 'r') as f:
+    data = f.read()
+    tmp = data.split()
+    print('단어수 : [%d]' %len(tmp))
+
+#168 파일에서 특정 단어 개수 계산
+def countWord(filename, word):
+    with open(filename, 'r') as f:
+        text = f.read()
+        text = text.lower()
+        pos = text.find(word)
+        count = 0
+        while pos != -1:
+            count += 1
+            pos = text.find(word, pos + 1)
+    return count
+
+word = input('mydata.txt에서 개수를 구할 단어를 입력하세요: ')
+word = word.lower()
+ret = countWord('mydata.txt', word)
+print('[%s]의 개수: %d' %(word, ret))
+
+#169 파일에서 특정 문자열 교체
+t1 = input('찾을 단어를 입력하세요: ')
+t2 = input('변경할 단어를 입력하세요: ')
+
+with open('mydata.txt', 'r') as f:
+    with open('mydata2.txt, 'w) as h
+        text = f.read()
+        text = text.replace(t1, t2)
+        h.write(text)
+        
+print('[%s]를 [%s]로 변경하였습니다.' %(t1, t2))
+        
+#170 URL에 접속하여 HTML 페이지 화면에 출력
+from urllib.request import urlopen
+
+url = 'https://www.python.org'
+with urlopen(url) as f:
+    doc = f.read().decode()
+    print(doc)
+
+#171 URL에 접속하여 HTML 페이지를 파일로 저장
+from urllib.request import urlopen
+
+url = 'https://www.python.org'
+with urlopen(url) as f:
+    doc = f.read().decode()
+    with open('pyhonhome.html', 'w') as h:
+        h.writelines(doc)
+
+#172 인터넷에 있는 이미지를 내 PC로 저장
+from urllib.request import urlopen
+
+imgurl = 'http://www.iaidol.com/img_sample.jpg'
+imgname = imgurl.split('/')[-1]
+try:
+    with urlopen(imgurl) as f:
+        with open(imgname, 'wb') as h:
+            imgdata = f.read()
+            h.write(img)
+except Exception as e:
+    print(e)
+
+#173 인터넷에 있는 대용량 파일을 내 PC로 저장
+from urllib.request import urlopen
+
+BUFSIZE = 256*1024
+
+fileurl = 'https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe'
+filename = fileurl.split('/')[-1]
+try:
+    with urlopen(fileurl) as f:
+        with open(filename. 'wb') as h:
+            buf = f.read(BUFSIZE)
+            while buf:
+                h.write(buf)
+                buf = f.read(BUFSIZE)
+except Exception as e:
+    print(e)
+
 #174
 #175
 #176
