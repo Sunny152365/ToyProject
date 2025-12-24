@@ -1692,7 +1692,7 @@ try:
 except Exception as e:
     print(e)
 
-#173 인터넷에 있는 대용량 파일을 내 PC로 저장
+#173 인터넷에 있는 대용량 파일을 내 PC로 저장(용량을 BUFSIZE로 쪼개서 다운로드)
 from urllib.request import urlopen
 
 BUFSIZE = 256*1024
@@ -1709,16 +1709,99 @@ try:
 except Exception as e:
     print(e)
 
-#174
-#175
-#176
-#177
-#178
-#179
-#180
-#181
-#182
-#183
+#174 10MB 파일을 1MB 파일 10개로 분리
+filename = 'python-3.8.2.exe'
+subsize = 1024*1024*3  # 3MB
+suffix = 0
+
+with open(filename, 'rb') as f:
+    buf = f.read(subsize)
+    while buf:
+        subfilename = filename + '_' + str(suffix)
+        with open(subfilename, 'wb') as h:
+            h.write(buf)
+            print('[%s] 완료' %subfilename)
+            
+        buf = f.read(subsize)
+        suffix += 1
+
+#175 1MB 파일 10개를 합쳐서 10MB 파일로 만들기
+BUFSIZE = 256*1024
+merge_filename = 'ret.exe'
+filelist = ['python=3.5.2.exe+' + str(x) for x in range(10)]
+
+with open(merge_filename, 'wb') as f:
+    for filename in filelist:
+        print('[%s] 합치는 중..' %filename)
+        with open(filename, 'rb') as h:
+            buf = h.read(BUFSIZE)
+            while buf:
+                f.write(buf)
+                buf = h.read(BUFSIZE)
+
+print('파일 합치기가 완료되었습니다.')
+
+#176 파일을 ZIP 압축 파일로 만들기
+from zipfile import *
+
+def compressZip(zipname, filename):
+    print('[%s] -> [%s] 압축...' %(filename, zipname))
+    with ZipFile(zipname, 'w') as ziph:
+        ziph.write(filename)
+        
+    print('압축이 끝났습니다.')
+
+filename = 'mydata.txt'
+zipname = filename + '.zip'
+compressZip(zipname, filename)
+
+#177 디렉터리를 하나의 ZIP 압축 파일로 만들기
+from zipfile import *
+import os
+
+def compressAll(zipname, folder):
+    print('[%s] -> [%s] 압축...' %(folder, zipname))
+    with ZipFile(zipname, 'w') as ziph:
+        for dirname, subdirs, files in os.walk(folder):
+            for file in files:
+                ziph.write(os.path.join(dirname, file))
+    
+folder = 'tmp'
+zipname = folder + '.zip'
+compressAll(zipname, folder)
+
+#178 ZIP 파일 압축 풀기
+from zipfile import *
+
+def extractZip(zipname):
+    with ZipFile(zipname, 'r') as ziph:
+        ziph.extractall()
+        print('[%s]가 성공적으로 추출되었습니다.' %zipname)
+        
+extractZip('files.zip')
+
+#179 로또 번호 추출기 만들기
+from random import shuffle
+from time import sleep
+
+gamenum = input('로또 게임 회수를 입력하세요: ')
+
+for i in range(int(gamenum)):
+    balls = [x+1 for x in range(45)]
+    ret = []
+    for j in range(6):
+        shuffle(balls)
+        number = balls.pop()
+        ret.append(number)
+    ret.sort()
+    print('로또 번호[%d]: ' %(i+1), end='')
+    print(ret)
+    sleep(1)
+
+#180 남녀 파트너 정해주기 프로그램 만들기(zip)
+#181 데이터 처리하기_1 연도별 출생아 수 계산
+#182 데이터 처리하기_2 연도별 성별 출생아 수 계산
+#183 데이터 처리하기_3 연도별 인기있는 상위 10개 성별 출생아 이름 구하기
 #184
 #185
 #186
