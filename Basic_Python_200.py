@@ -1799,7 +1799,41 @@ for i in range(int(gamenum)):
     sleep(1)
 
 #180 남녀 파트너 정해주기 프로그램 만들기(zip)
+from random import shuffle
+
+male = ['슈퍼맨', '심봉사', '로미오', '이몽룡', '마루치']
+female = ['원더우먼', '뺑덕', '줄리엣', '성춘향', '아라치']
+shuffle(male)
+shuffle(female)
+couples = zip(male, female)
+
+for i, couple in enumerate(couples):
+    print('커플[%d]: [%s] - [%s]' %(i+1, couple[0], couple[1]))
+
 #181 데이터 처리하기_1 연도별 출생아 수 계산
+def countBirths():
+    ret = []
+    for y in range(1880, 2016):
+        count = 0
+        filename = 'names/yob%d.txt' %y
+        with open(filename, 'r') as f:
+            data = f.readlines()
+            for d in data:
+                if d[-1] == '\n':
+                    d d[:-1]
+            
+                birth = d.split(',')[2]
+                count += int(birth)
+        ret.append((y, count))
+    return ret
+
+result = countBirths()
+with open('birth_by_year.csv', 'w') as f:
+    for year, birth in result:
+        data = '%s, %s\n' %(year, birth)
+        print(data)
+        f.writhe(data)
+
 #182 데이터 처리하기_2 연도별 성별 출생아 수 계산
 #183 데이터 처리하기_3 연도별 인기있는 상위 10개 성별 출생아 이름 구하기
 #184
