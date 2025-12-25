@@ -1798,7 +1798,7 @@ for i in range(int(gamenum)):
     print(ret)
     sleep(1)
 
-#180 남녀 파트너 정해주기 프로그램 만들기(zip)
+#180 남녀 파트너 정해주기 프로그램 만들기(zip) : 동일한 요소 개수를 가진 두 개 이상의 리스트를 인자로 받고, 각 리스트의 같은 인덱스의 요소들끼리 묶은 튜플을 요소로 하는 리스트로 만들어 리턴
 from random import shuffle
 
 male = ['슈퍼맨', '심봉사', '로미오', '이몽룡', '마루치']
@@ -1835,7 +1835,85 @@ with open('birth_by_year.csv', 'w') as f:
         f.writhe(data)
 
 #182 데이터 처리하기_2 연도별 성별 출생아 수 계산
+def countBirthsBySex():
+    ret = []
+    for y in range(1880, 2016):
+        count_f = 0                # 여자아기 출생아 수
+        conut_m = 0                # 남자아기 출생아 수
+        filename = 'names/yob%d.txt' %y
+        with open(filename, 'r') as f:
+            data = f.readlines()
+            for d in data:
+                if d[-1] == '\n':
+                    d = d[:-1]
+                    
+                tmp = d.split(',')
+                sex = tmp[1]
+                birth = tmp[2]
+                
+                if sex == 'F':
+                    count_f += int(birth)
+                else:
+                    count_m += int(birth)
+        ret.append((y, count_f, count_m))
+    return ret
+
+result = countBirthsBySex()
+with open('birth_by_sex.csv', 'w') as f:
+    for y, bf, bm in result:
+        data = '%s, %s, %s\n' %(y, bf, bm)
+        print(data)
+        f.write(data)    
+
 #183 데이터 처리하기_3 연도별 인기있는 상위 10개 성별 출생아 이름 구하기
+from os.path import exists
+
+def getTop10BabyName(year):
+    nameF = { }
+    nameM = { }
+    
+    filename = 'names/yob%d.txt' %year
+    if not exists(filename):
+        print('[%s] 파일이 존재하지 않습니다.' %filename)
+        return None
+        
+    with open(filename, 'r') as f:
+        data = f.readlines()
+        for d in data:
+            if d[-1] == '\n':
+                d = d[:-1]
+            
+            tmp = d.split(',')
+            name = tmp[0]
+            sex = tmp[1]
+            birth = tmp[2]
+            
+            if sex == 'F':
+                ret = nameF
+            else:
+                ret = nameM
+            
+            if name in ret:
+                ret[name] += int(birth)
+            else:
+                ret[name] = int(birth)
+    
+    retF = sorted(nameF.items(), key=lambda x:x[1], reverse=True)
+    retM = sorted(nameM.items(), key=lambda x:x[1], reverse=True)
+    
+    for i, name in enumerate(retF):
+        if i > 9:
+            break
+        print('TOP_%d 여자아기이름: %s' %(i+1, name))
+    
+    for i, name in enumerate(retM):
+        if i > 9:
+            break
+        print('TOP_%d 남자아기이름: %s' %(i+1, name))
+    
+y = input('인기순 상위10개 이름을 알고 싶은 출생년도를 입력하세요(예:2001): ')
+getTop10BabyName(y)
+
 #184
 #185
 #186
