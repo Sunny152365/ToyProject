@@ -1915,6 +1915,18 @@ y = input('인기순 상위10개 이름을 알고 싶은 출생년도를 입력�
 getTop10BabyName(y)
 
 #184 웹서버 로그 처리하기_1 총 페이지뷰 수 계산
+pageviews = 0
+
+with open('access_log', 'r') as f:
+    logs = f.readlines()
+    for log in logs:
+        log = log.split()
+        status = log[8]
+        if status == '200':
+            pageviews += 1
+    
+print('총 페이지뷰: [%d]' %pageviews)
+
 #185 웹서버 로그 처리하기_2 고유 방문자 수 계산
 #186 웹서버 로그 처리하기_3 총 서비스 용량 계산
 #187 웹서버 로그 처리하기_4 사용자별 서비스 용량 계산
