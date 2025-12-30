@@ -1928,14 +1928,197 @@ with open('access_log', 'r') as f:
 print('총 페이지뷰: [%d]' %pageviews)
 
 #185 웹서버 로그 처리하기_2 고유 방문자 수 계산
+visit_ip = [ ]
+
+with open('access_log', 'r') as f:
+    logs = f.readlines()
+    for log in logs:
+        log = log.split()
+        ip = log[0]
+        if ip not in visit_ip:
+            visit_ip.append(ip)
+            
+print('고유 방문자 수: [%d]' %len(visit_ip))
+
 #186 웹서버 로그 처리하기_3 총 서비스 용량 계산
+KB = 1024
+total_service = 0
+
+with open('access_log', 'r') as f:
+    logs = f.readlines()
+    for log in logs:
+        log = log.split()
+        servicebyte = log[9]
+        if servicebyte.isdigit():
+            total_service += int(servicebyte)
+        
+total_service /= KB
+print('총 서비스 용량: %dKB' %total_service)
+
 #187 웹서버 로그 처리하기_4 사용자별 서비스 용량 계산
+services = [ ]
+
+with open('access_log', 'r') as f:
+    logs = f.readlines()
+    for log in logs:
+        log = log.split()
+        ip = log[0]
+        servicebyte = log[9]
+        if servicebyte.isdigit():
+            servicebyte = int(servicebyte)
+        else:
+            servicebyte = 0
+            
+        if ip not in services:
+            services[ip] = servicebyte
+        else:
+            services[ip] += servicebyte
+            
+ret = sorted(services.items(), key=lambda x:x[1], reverse=True)
+
+print('사용자IP - 서비스용량')
+for ip, b in ret:
+    print('[%s] - [%d]' %(ip, b))
+
 #188 간단한 슈팅게임 만들기_1 게임화면 구성
+import pygame
+
+# 게임에 사용되는 전역변수 정의
+BLACK = (0, 0, 0)
+pad_width = 480
+pad_height = 640
+
+# 게임 실행 메인 함수
+def runGame():
+    global gamepad, clock
+    
+    on game = False
+    while not ongame:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                doneFlag = True
+        
+        # 게임 화면을 검은색으로 채우고 화면을 업데이트 함
+        gamepad.fill(BLACK)
+        pygame.display.update()
+        clock.tick(60)
+        
+    pygame.quit()
+    
+# 게임 초기화 함수
+def initGame():
+    global gamepad, clock
+    
+    pygame.init()
+    gamepad = pygame.display.set_mode((pad_width, pad_height))
+    pygame.display.set_caption('MyGalaga')
+    clock = pygame.time.Clock()
+    
+initGame()
+runGame()
+
 #189 간단한 슈팅게임 만들기_2 전투기 배치
+import pygame
+
+# 게임에 사용되는 전역변수 정의
+BLACK = (0, 0, 0)
+pad_width = 480
+pad_height = 640
+fighter_width = 36
+fighter_height = 48
+
+# 게임에 등장하는 객체를 드로잉
+def drawObjecgt(obj, x, y):
+    global gamepad
+    gamepad.blit(obj, (x, y))
+    
+# 게임 실행 메인 함수
+def runGame():
+    global gamepad, clock
+    
+    # 전투기 초기 위치 (x, y) 설정
+    x = int(pad_width * 0.45)
+    y = int(pad_height * 0.9)
+    x_change = 0
+    
+    on game = False
+    while not ongame:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                ongame = True
+            
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    x_change -= 5
+                
+                elif event.key == pygame.K_RIGHT:
+                    x_change += 5
+            
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    x_change = 0
+        
+        # 게임 화면을 검은색으로 채우기
+        gamepad.fill(BLACK)
+        
+        # 전투기 위치를 재조정
+        x += x_change
+        if x < 0:
+            x = 0
+        elif x > pad_width - fighter_width:
+            x = pad_width - fighter_width
+            
+        drawObject(fighter, x, y)
+        pygame.display.update()
+        clock.tick(60)
+        
+    pygame.quit()
+    
+# 게임 초기화 함수
+def initGame():
+    global gamepad, clock, fighter
+    
+    pygame.init()
+    gamepad = pygame.display.set_mode((pad_width, pad_height))
+    pygame.display.set_caption('MyGalaga')
+    fighter = pygame.image.load('fighter.png')
+    clock = pygame.time.Clock()
+    
+initGame()
+runGame()
+
 #190 간단한 슈팅게임 만들기_3 적 날아오게 하기
+
+
 #191 간단한 슈팅게임 만들기_4 무기 발사
+
+
 #192 간단한 슈팅게임 만들기_5 게임규칙 적용
+
+
 #193 에코 서버 만들기_1
+import socket
+
+HOST = ''
+PORT = 9009
+
+def runServer():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind((HOST, PORT))
+        sock.listen(1)
+        print('클라이언트 연결을 기다리는 중..')
+        conn. addr = sock.accept()
+        with conn:
+            print('[%s]와 연결됨' %addr[0])
+            while True:
+                data = conn.recv(1024)
+                if not data:
+                    break
+                print('메시지 수신[%s]' %data.decode())
+                conn.sendall(data)
+
+runServer()
+
 #194 에코 클라이언트 만들기_1
 #195 에코 서버 만들기_1
 #196 에코 클라이언트 만들기_2
