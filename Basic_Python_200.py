@@ -2517,9 +2517,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
 print('에코 서버로부터 받은 데이터 [%s]' %data.decode())
 
 #195 에코 서버 만들기_1
+import socket
+
 
 
 #196 에코 클라이언트 만들기_2
+import socket
+
 
 
 #197 파일 송신 프로그램 만들기
