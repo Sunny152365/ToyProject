@@ -2524,6 +2524,8 @@ import socket
 #196 에코 클라이언트 만들기_2
 import socket
 
+HOST = 'localhost'
+PORT = 9009
 
 
 #197 파일 송신 프로그램 만들기
