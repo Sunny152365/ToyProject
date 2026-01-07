@@ -2519,7 +2519,38 @@ print('에코 서버로부터 받은 데이터 [%s]' %data.decode())
 #195 에코 서버 만들기_1
 import socket
 
+HOST = ''
+PORT = 9009
 
+class MyTcpHandler(socketserver.BaseRequestHandler):
+    # 이 클래스는 서버 하나당 단 한 번 초기화됩니다.
+    # handle() 메소드에 클라이언트 연결 처리를 위한 로직을 구현합니다.
+    def handle(self):
+        print('[%s] 연결됨' %self.client_address[0])
+        
+        try:
+            while True:
+                self.data = self.request.recv(1024)
+                if self.data.decode() == '/quit':
+                    print('[%s] 사용자에 의해 중단' %self.client_address[0])
+                    return
+                
+                print('[%s] %self.data.decode()')
+                self.request.sendall(self.data)
+        except Exception as e:
+            print(e)
+            
+def runServer():
+    print('+++ 에코 서버를 시작합니다.')
+    print('+++ 에코 서버를 끝내려면 Ctrl+C를 누르세요.')
+    
+    try:
+        server = socketserver.TCPServer((HOST, PORT), MyTcpHandler)
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print('--- 에코 서버를 종료합니다.')
+
+runServer()
 
 #196 에코 클라이언트 만들기_2
 import socket
@@ -2527,9 +2558,61 @@ import socket
 HOST = 'localhost'
 PORT = 9009
 
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+    sock.connect((HOST, PORT))
+    
+    while True:
+        msg = input('메시지 입력: ')
+        if msg == '/quit':
+            sock.sendall(msg.encode())
+            break
+        
+        sock.sendall(msg.encode())
+        data = sock.recv(1024)
+        print('에코 서버로부터 받은 데이터 [%s]' %data.decode())
+        
+print('클라이언트 종료')
 
 #197 파일 송신 프로그램 만들기
+import socket
+from os.path import exists
 
+HOST = ''
+PORT = 9009
+
+class MyTcpHandler(socketserver.BaseRequestHandler):
+    def handle(self):
+        data_transferred = 0
+        print('[%s] 연결됨' %self.client_address[0])
+        filename = self.request.recv(1024)
+        filename = filename.decode()
+        
+        if not exists(filename):
+            return
+        
+        print('파일 [%s] 전송 시작...' %filename)
+        with open(filename, 'rb') as f:
+            try:
+                data = f.read(1024)
+                while data:
+                    data_transferred += self.request.send(data)
+                    data = f.read(1024)
+            except Exception as e:
+                print(e)
+        
+        print('전송완료 [%s], 전송량 [%d]' %(filename, data_transferred))
+        
+def runServer():
+    print('+++ 파일 서버를 시작합니다.')
+    print('+++ 파일 서버를 끝내려면 Ctrl+C를 누르세요.')
+    
+    try:
+        server = socketserver.TCPServer((HOST, PORT), MyTcpHandler)
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print('--- 파일 서버를 종료합니다.')
+        
+runServer()
 
 #198 파일 수신 프로그램 만들기
 
