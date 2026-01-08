@@ -2615,10 +2615,164 @@ def runServer():
 runServer()
 
 #198 파일 수신 프로그램 만들기
+import socket
 
+HOST = 'localhost'
+PORT = 9009
+
+def getFileFromServer(filename):
+    data_transferred = 0
+    
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.connect((HOST, PORT))
+        sock.sendall(filename.encode())
+        
+        data = sock.recv(1024)
+        if not data:
+            print('파일[%s]: 서버에 존재하지 않거나 전송중 오류발생' %filename)
+            return
+        
+        with open('download/' +filename, 'wb') as f:
+            try:
+                while data:
+                    f.write(data)
+                    data_transferred += len(data)
+                    data = sock.recv(1024)
+            except Exception as e:
+                print(e)
+                
+print('파일[%s] 전송종료. 전송량[%d]' %(filename, data_transferred))
+
+filename = input('다운로드 받을 파일이름을 입력하세요: ')
+getFileFromServer(filename)
 
 #199 채팅 서버 만들기
+import socketserver
+import threading
 
+HOST = ''
+PORT = 9009
+lock = threading.Lock()
+
+class UserManager:
+    def __init__(self):
+        self.users = { }
+        
+    def addUser(self, username, conn, addr):
+        if username in self.users:
+            conn.send('이미 등록된 사용자 이름입니다.\n'.encode())
+            return None
+        
+        # 새로운 사용자를 등록함
+        lock.acquire()
+        self.users[username] = (conn, addr)
+        lock.release()
+        
+        self.sendMessageToAll('[%s]님이 입장하였습니다.\n' %username)
+        print('+++ 대화 참여자 수 [%d]' %len(self.users))
+        
+        return username
+    
+    def removeUser(self, username):
+        if username not in self.users:
+            return
+        
+        lock.acquire()
+        del self.users[username]
+        lock.release()
+        
+        self.sendMessageToAll('[%s]님이 퇴장하였습니다.\n' %username)
+        print('--- 대화 참여자 수 [%d]' %len(self.users))
+    
+    def messageHandler(self, username, msg):
+        if msg[0] != '/':
+            self.sendMessageToAll('[%s] %s\n' %(username, msg))
+            return
+        
+        if msg.strip() == '/quit':
+            self.removeUser(username)
+            return -1
+        
+    def sendMessageToAll(self, msg):
+        for conn, addr in self.users.values():
+            conn.send(msg.encode())
+    
+class MyTcpHandler(socketserver,BaseRequestHandler):
+    userman = UserManager()
+    
+    def handle(self):
+        print('[%s] 연결됨' %self.client_address[0])
+        
+        try:
+            username = self.registerUsername()
+            msg = self.request.recv(1024)
+            while msg:
+                print(msg.decode())
+                if self.username.messageHandler(self.username, msg.decode()) == -1:
+                    self.request.close()
+                    break
+                msg = self.request.recv(1024)
+        
+        except Exception as e:
+            print(e)
+        
+        print('[%s] 접속종료' %self.client_address[0])
+        self.userman.removeUser(username)
+        
+    def registerUsername(self):
+        while True:
+            self.request.send('로그인ID:'.encode())
+            username = self.request.recv(1024)
+            username = username.decode().strip()
+            if self.userman.addUser(username, self.request, self.client_address):
+                return username
+            
+class CahtingServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+    pass
+
+def runServer():
+    print('+++ 채팅 서버를 시작합니다.')
+    print('+++ 채팅 서버를 끝내려면 Ctrl+C를 누르세요.')
+    
+    try:
+        server = ChattingServer((HOST, PORT), MyTcpHandler)
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print('--- 채팅 서버를 종료합니다.')
+        server.shutdown()
+        server.server_close()
+        
+runServer()
 
 #200 채팅 클라이언트 만들기
+import socket
+from threading import Thread
 
+HOST = 'localhost'
+PORT = 9009
+
+def rcvMsg(sock):
+    while True:
+        try:
+            data = sock.recv(1024)
+            if not data:
+                break
+            print(data.decode())
+        except:
+            pass
+    
+def runChat():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.connect((HOST, PORT))
+        t = Thread(target = rcvMsg, args=(sock,))
+        t.daemon = True
+        t.start()
+        
+        while True:
+            msg = input()
+            if msg == '/quit':
+                sock.send(msg.encode())
+                break
+            sock.send(msg.encode())
+            
+runChat()
