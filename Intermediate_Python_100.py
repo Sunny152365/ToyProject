@@ -73,6 +73,8 @@ print('title 태그 이름: ', soup.title.name)
 print('title 태그 문자열: ',soup.title.string)
 
 #005 크롬 개발자 도구
+
+
 #006 웹 문서의 그림 이미지 파일을 PC에 저장하기
 #007 웹 문서에 포함된 모든 하이퍼링크 추출
 #008 CSS Selector 활용_1
